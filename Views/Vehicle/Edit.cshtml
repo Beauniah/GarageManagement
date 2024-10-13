@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model GarageManagement.Models.Entities.Vehicle
+<h1>Edit Vehilce</h1>
+@if (Model is null)
+{
+    <p>no vehicle found</p>
+}
+@if (Model is not null)
+{
+    <form method="post">
+        <div class="mt-3">
+            <label class="col-form-label">Vehicle id</label>
+            <input type="text" class="form-control" asp-for="VehicleId" readonly />
+            <label class="col-form-label">Make</label>
+            
+            <input type="text" class="form-control" asp-for="Make" />
+            <label class="col-form-label">Model</label>
+            <input type="text" class="form-control" asp-for="Model" />
+            <label class="col-form-label">year</label>
+            <input type="text" class="form-control" asp-for="Year" />
+            <label class="col-form-label">Date Aquired</label>
+            <input type="text" class="form-control" asp-for="DateAquired" />
+
+            <label class="col-form-label">Ministry</label>
+            <select class="form-control" asp-for="MinistryId" asp-items="@(new SelectList(ViewBag.Ministries, "MinistryId", "Name"))">
+                <option value="">Select Ministry</option>
+            </select>
+
+            <button type="submit" class="btn btn-outline-primary">Save</button>
+            <button type="submit" class="btn btn-danger"
+                    asp-action="Delete"
+                    asp-controller="Vehicle">
+                Delete
+            </button>
+        </div>
+    </form>
+}

@@ -1,0 +1,30 @@
+﻿@model GarageManagement.Models.ViewModels.AddVehicleViewModel
+
+<h1>Add Vehicle</h1>
+<form method="post">
+    <div class="mt-3">
+        <label class="col-form-label">Make</label>
+        <input type="text" class="form-control" asp-for="Make" />
+        <span asp-validation-for="Make" class="text-danger"></span>
+
+        <label class="col-form-label">Model</label>
+        <input type="text" class="form-control" asp-for="Model" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+
+        <label class="col-form-label">Year</label>
+        <input type="text" class="form-control" asp-for="Year" />
+        <span asp-validation-for="Year" class="text-danger"></span>
+
+        <label class="col-form-label">DateAquired</label>
+        <input type="text" class="form-control" asp-for="DateAquired" />
+        <span asp-validation-for="DateAquired" class="text-danger"></span>
+
+        <label class="col-form-label">Ministry</label>
+        <select class="form-control" asp-for="MinistryId" asp-items="@(new SelectList(Model.Ministries, "MinistryId", "Name"))">
+            <option value="">Select Ministry</option>
+        </select>
+        <span asp-validation-for="MinistryId" class="text-danger"></span>
+
+        <button type="submit" class="btn btn-outline-primary">Add Vehicle</button>
+    </div>
+</form>
