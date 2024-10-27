@@ -3,7 +3,7 @@
 *@
 @{
 }
-@model GarageManagement.Models.Entities.Vehicle
+@model GarageManagement.Models.ViewModels.AddVehicleViewModel
 <h1>Edit Vehilce</h1>
 @if (Model is null)
 {
@@ -26,7 +26,7 @@
             <input type="text" class="form-control" asp-for="DateAquired" />
 
             <label class="col-form-label">Ministry</label>
-            <select class="form-control" asp-for="MinistryId" asp-items="@(new SelectList(ViewBag.Ministries, "MinistryId", "Name"))">
+            <select class="form-control" asp-for="MinistryId" asp-items="@(new SelectList(Model.Ministries, "MinistryId", "Name"))">
                 <option value="">Select Ministry</option>
             </select>
 
