@@ -61,20 +61,29 @@ namespace GarageManagement.Controllers
             return View(incident);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var incident = _context.Incidents.FirstOrDefault(v => v.IncidentId == id);
+            var incident = await _context.Incidents.FindAsync(id);
             if (incident == null)
             {
                 return NotFound();
             }
 
-            ViewBag.Vehicles = _context.Vehicle.ToList();
+            var viewModel = new AddIncidentViewModel
+            {
+                IncidentId = incident.IncidentId,
+                Description = incident.Description,
+                VehicleId = incident.VehicleId,
+                Status = incident.Status,
+                DateReported = incident.DateReported,
+                SeverityLevel = incident.SeverityLevel,
+                Vehicles = await _context.Vehicle.ToListAsync()
+            };
 
-            return View(incident);
+            return View(viewModel);
         }
+
 
         [HttpPost]
 

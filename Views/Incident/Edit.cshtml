@@ -4,7 +4,8 @@
 @{
 }
 
-@model GarageManagement.Models.Entities.Incident
+@model GarageManagement.Models.ViewModels.AddIncidentViewModel
+
 <h1>Edit Incident</h1>
 @if (Model is null)
 {
@@ -37,7 +38,7 @@
             </select>
 
             <label class="col-form-label">Vehicles</label>
-            <select class="form-control" asp-for="VehicleId" asp-items="@(new SelectList(ViewBag.Vehicles, "VehicleId", "Make"))">
+            <select class="form-control" asp-for="VehicleId" asp-items="@(new SelectList(Model.Vehicles, "VehicleId", "Make"))">
                 <option value="">Select Vehicles</option>
             </select>
 
