@@ -39,13 +39,17 @@ namespace GarageManagement.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in errors)
+                // Log all validation errors for debugging
+                foreach (var modelStateKey in ModelState.Keys)
                 {
-                    // Log or inspect error messages
-                    Console.WriteLine(error.ErrorMessage);
+                    var modelStateVal = ModelState[modelStateKey];
+                    foreach (var error in modelStateVal.Errors)
+                    {
+                        Console.WriteLine($"Key: {modelStateKey}, Error: {error.ErrorMessage}");
+                    }
                 }
 
+                // Repopulate Ministries and return view
                 viewModel.Ministries = _context.Ministry.ToList();
                 return View(viewModel);
             }
@@ -63,6 +67,7 @@ namespace GarageManagement.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("List");
         }
+
 
         [HttpGet]
         public async Task<IActionResult> List()
